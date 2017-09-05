@@ -41,7 +41,7 @@ def read_model_data(m):
            print(colored(" => Error reply ... check your entry <=", "yellow", "on_red"))
            print
            time.sleep(1)    # pause 1 second
-           print(colored(" => END <=", ,"on_blue"))
+           print(colored(" => END <=", "yellow","on_blue"))
            sys.exit()
         vs = msg['vs']
         if vs == 127:
@@ -71,7 +71,7 @@ def read_model_data(m):
               buf = "("+vs_str[vs]+")"
         except KeyError:
               pass
-        print (colored(" => {} * SERVER: {} * FLAGS: {} * SID: {} * UID: {} <=", , "on_blue")).format(buf,server,flags,sid,uid)
+        print (colored(" => {} * SERVER: {} * FLAGS: {} * SID: {} * UID: {} <=", "yellow", "on_blue")).format(buf,server,flags,sid,uid)
         print
         print (colored(" => (MODEL DATA) => {} <=", "white", "on_blue")).format(msg)
         print
@@ -79,12 +79,12 @@ def read_model_data(m):
 if __name__ == "__main__":
         if len(sys.argv) > 1:
                 camgirl = sys.argv[1]
-                print (colored(" => Selected MFC Model => {} <=", , "on_blue")).format(camgirl)
+                print (colored(" => Selected MFC Model => {} <=", "yellow", "on_blue")).format(camgirl)
                 print
         else:
                 print
                 time.sleep(1)    # pause 1 second
-                print(colored(" => END <=", ,"on_blue"))
+                print(colored(" => END <=", "yellow","on_blue"))
                 sys.exit()
         try:
                 xchat = [22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,83,90,92,93,94,95]
@@ -138,19 +138,19 @@ if __name__ == "__main__":
                 os.system(command)
                 print
                 time.sleep(1)    # pause 1 second
-                print(colored(" => END <=", ,"on_blue"))
+                print(colored(" => END <=","yellow","on_blue"))
                 sys.exit()
 
          else:
                 print(colored(" => 'NO MOBILE FEED' is not supported! <=", "yellow", "on_red"))
                 print
                 time.sleep(1)    # pause 1 second
-                print(colored(" => END <=", ,"on_blue"))
+                print(colored(" => END <=","yellow","on_blue"))
                 sys.exit()
 
         else:
                 print(colored(" => This video stream can't be recorded! <=", "yellow", "on_red"))
                 print
                 time.sleep(1)    # pause 1 second
-                print(colored(" => END <=", ,"on_blue"))
+                print(colored(" => END <=","yellow","on_blue"))
                 sys.exit()
