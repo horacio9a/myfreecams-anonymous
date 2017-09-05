@@ -29,3 +29,6 @@ While using scripts `mfcr.py` and `mfcrts.py`(options numbers 2 and 3) a copy of
 If you want to record more than one model at the same time then you need to start another copy of `mfc.bat`. 
 Otherwise for scripts `mfc.py` and `mfcts.py`(options numbers 0 and 1) I have deliberately predicted that each recording has its own ffmpeg and ffplay frame so you can easily stop recording or playing at any time if needed. 
 
+![alt screenshot](./mfc-py.jpg)
+
+![alt screenshot](./mfcr-py.jpg)
