@@ -105,7 +105,7 @@ if __name__ == "__main__":
                 ws.send("hello fcserver\n\0")
                 ws.send("1 0 0 20071025 0 guest:guest\n\0")
         except:
-                print(colored(" => We're fucked <=", "yellow", "on_red"))
+                print(colored(" => This xchat is busy ... Try again <=", "yellow", "on_red"))
                 sys.exit()
         rembuf = ""
         quitting = 0
