@@ -6,3 +6,4 @@ colorama==0.3.7
 termcolor==1.1.0
 configparser==3.5.0
 websocket==0.2.1
+websocket-client==0.37.0
