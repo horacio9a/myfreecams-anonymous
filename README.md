@@ -6,12 +6,12 @@ You don't need to be registered cam4 user for recording models with this myfreec
 
 Requirements
 ============
-1. [Python 2.7.13](https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi) instalation. Those who need to install python should watch this video: https://www.youtube.com/watch?v=QYUBz4mrnFU
+1. Download here [Python 2.7.13](https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi) instalation. Those who need to install python should watch this [video](https://www.youtube.com/watch?v=QYUBz4mrnFU)
 3. [ffmpeg](https://ffmpeg.zeranoe.com/builds/) must be somewere in the path or in directory with this script.
 
 Setup
 =====
-1. Install requirements `pip install -r Requirements.txt`
+1. Install requirements `pip install -r Requirements.txt` ... Try this for [urllib](https://www.versioneye.com/python/urllib/1.21.1)
 2. Download and unpack the [code](https://codeload.github.com/horacio9a/myfreecams-anonymous/zip/master).
 3. Open console and go into the directory where you unpacked the files (default is C:/-mfc-py/)
 4. mfc.bat can be anywhere (default is C:/Windows/)
