@@ -1,4 +1,4 @@
-# MFC Remote FFMPEG FLV Anonymous Recorder v.1.0.4 by Horacio for Python 2.7.13
+# MFC Remote FFMPEG FLV Anonymous Recorder v.1.0.5 by Horacio for Python 2.7.13
 
 import os,sys,urllib,re,json,time,datetime,random,requests,command,websocket
 from websocket import create_connection
@@ -16,7 +16,7 @@ print
 vs_str = {}
 vs_str[0] = "PUBLIC"
 vs_str[2] = "AWAY"
-vs_str[12] = "PVT"
+vs_str[12] = "PRIVATE"
 vs_str[13] = "GROUP"
 vs_str[90] = "CAM-OFF"
 vs_str[127] = "OFFLINE"
@@ -132,7 +132,7 @@ if __name__ == "__main__":
                 path = config.get('folders', 'output_folder')
                 filename = camgirl + "_MFC_" + timestamp + ".flv"
                 fn = path + filename
-                print (colored(" => start ffmpeg => RECORD => {} <=", "yellow", "on_red")).format(filename)
+                print (colored(" => REC => {} <=", "yellow", "on_red")).format(filename)
                 print
                 command = ('ffmpeg -hide_banner -loglevel panic -i {} -c:v copy -c:a aac -b:a 160k {}'.format(url,fn))
                 os.system(command)
