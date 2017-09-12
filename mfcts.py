@@ -1,4 +1,4 @@
-# MFC FFMPEG TS Anonymous Player and Recorder v.1.0.4 by Horacio for Python 2.7.13
+# MFC FFMPEG TS Anonymous Player and Recorder v.1.0.5 by Horacio for Python 2.7.13
 
 import os,sys,urllib,re,json,time,datetime,random,requests,command,websocket
 from websocket import create_connection
@@ -16,7 +16,7 @@ print
 vs_str = {}
 vs_str[0] = "PUBLIC"
 vs_str[2] = "AWAY"
-vs_str[12] = "PVT"
+vs_str[12] = "PRIVATE"
 vs_str[13] = "GROUP"
 vs_str[90] = "CAM-OFF"
 vs_str[127] = "OFFLINE"
@@ -99,6 +99,8 @@ if __name__ == "__main__":
         try:
                 xchat = [22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,83,90,92,93,94,95]
                 host = "ws://xchat"+str(random.choice(xchat)) + ".myfreecams.com:8080/fcsl"
+                host0 = host.split('ws://')[1]
+                host1 = host0.split('.')[0]
                 print (colored(" => Connecting to MFC Server => {} <=", "white", "on_blue")).format(host)
                 print
                 ws = create_connection(host)
@@ -150,13 +152,17 @@ if __name__ == "__main__":
            else:
                 mod = 'PLAY'
 
+           url = "http://video"+str(server)+".myfreecams.com:1935/NxServer/ngrp:mfc_"+str(cid)+".f4v_mobile/playlist.m3u8"
+           timestamp = str(time.strftime("%d%m%Y-%H%M%S"))
+           stime = str(time.strftime("%H:%M:%S"))
+           path = config.get('folders', 'output_folder')
+           filename = camgirl + "_MFC_" + timestamp + ".ts"
+           fn = path + filename
+
            if mod == 'PLAY':
-                url = "http://video"+str(server)+".myfreecams.com:1935/NxServer/ngrp:mfc_"+str(cid)+".f4v_mobile/playlist.m3u8"
-                timestamp = str(time.strftime("%d%m%Y-%H%M%S"))
-                filename = camgirl + "_MFC_" + timestamp + ".ts"
                 print
-                print (colored(" => Start ffplay => PLAY => {} <=", "yellow", "on_magenta")).format(filename)
-                command = ('start ffplay -i {} -infbuf -autoexit -x 640 -y 480 -window_title "{} * {}"'.format(url,filename,cgn))
+                print (colored(" => PLAY => {} <=", "yellow", "on_magenta")).format(filename)
+                command = ('start ffplay -i {} -infbuf -autoexit -x 640 -y 480 -window_title "{} * {} * {} * {} * {}"'.format(url,camgirl,stime,server,host1,cgn))
                 os.system(command)
                 print
                 time.sleep(1)    # pause 1 second
@@ -164,17 +170,12 @@ if __name__ == "__main__":
                 sys.exit()
 
            if mod == 'REC':
-                url = "http://video"+str(server)+".myfreecams.com:1935/NxServer/ngrp:mfc_"+str(cid)+".f4v_mobile/playlist.m3u8"
-                timestamp = str(time.strftime("%d%m%Y-%H%M%S"))
-                path = config.get('folders', 'output_folder')
-                filename = camgirl + "_MFC_" + timestamp + ".ts"
-                fn = path + filename
                 print
-                print (colored(" => Start ffplay => PLAY => {} <=", "white", "on_magenta")).format(filename)
-                command = ('start ffplay -i {} -infbuf -autoexit -x 640 -y 480 -window_title "{} * {}"'.format(url,fn,cgn))
+                print (colored(" => PLAY => {} <=", "white", "on_magenta")).format(filename)
+                command = ('start ffplay -i {} -infbuf -autoexit -x 640 -y 480 -window_title "{} * {} * {} * {} * {}"'.format(url,camgirl,stime,server,host1,cgn))
                 os.system(command)
                 print
-                print (colored(" => Start ffmpeg => RECORD => {} <=", "yellow", "on_red")).format(filename)
+                print (colored(" => REC => {} <=", "yellow", "on_red")).format(filename)
                 command = ('start ffmpeg -i {} -c copy -vsync 2 -r 60 -b:v 500k {}'.format(url,fn))
                 os.system(command)
                 print
