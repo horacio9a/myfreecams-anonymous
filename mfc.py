@@ -24,11 +24,7 @@ vs_str[90] = "CAM-OFF"
 vs_str[127] = "OFFLINE"
 
 def fc_decode_json(m):
-   try:
-      m = m.replace('\r', '\\r').replace('\n', '\\n')
-      return json.loads(m[m.find('{'):].decode('utf-8','ignore'))
-   except:
-      return json.loads('{\'lv\':0}')
+   return json.loads(m[m.find('{'):].decode('utf-8','ignore'))
 
 def read_model_data(m):
    global server
@@ -88,7 +84,7 @@ def read_model_data(m):
       occupation = '-'
 
    try:
-      topic = urllib.unquote(m_info['topic']).decode('utf-8')
+      topic = urllib.unquote(m_info['topic'])
    except:
       topic = '-'
 
@@ -118,7 +114,7 @@ def read_model_data(m):
    print (colored("\n => Cont: {} * Location: {}-{} * Age: {} * Ethnic: {} * Job: {} <=", "yellow", "on_blue")).format(continent,city,country,age,ethnic,occupation)
    print (colored("\n => Topic => {} <=", "yellow", "on_blue")).format(topic)
    print (colored("\n => Blurb => {} <=\n", "yellow", "on_blue")).format(blurb)
-#   print (colored(" => (MODEL DATA) => {} <=\n", "white", "on_blue")).format(msg)
+#   print (colored(" => (MODEL DATA) => {} <=\n", "white", "on_blue")).format(mdata)
 
 if __name__ == "__main__":
    if len(sys.argv) > 1:
@@ -155,7 +151,7 @@ if __name__ == "__main__":
       ws.send("hello fcserver\n\0")
       ws.send("1 0 0 20071025 0 guest:guest\n\0")
    except:
-      print(colored(" => This chat server is busy ... Try again <=", "yellow", "on_red"))
+      print(colored("\n => This chat server is busy ... Try again <=\n", "yellow", "on_red"))
       time.sleep(6)
       sys.exit()
    rembuf = ""
@@ -171,15 +167,15 @@ if __name__ == "__main__":
          fc = hdr.group(1)
          mlen = int(fc[0:4])
          fc_type = int(fc[4:])
-         msg = sock_buf[4:4+mlen]
-         if len(msg) < mlen:
+         mdata = sock_buf[4:4+mlen]
+         if len(mdata) < mlen:
             rembuf = ''.join(sock_buf)
             break
-         msg = urllib.unquote(msg)
+         mdata = urllib.unquote(mdata)
          if fc_type == 1:
             ws.send("10 0 0 20 0 %s\n\0" % camgirl)
          elif fc_type == 10:
-            read_model_data(msg)
+            read_model_data(mdata)
             quitting = 1
          sock_buf = sock_buf[4+mlen:]
          if len(sock_buf) == 0:
