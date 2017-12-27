@@ -187,10 +187,10 @@ if __name__ == "__main__":
       else:
          print(colored(" => 'NO MOBILE FEED' models is not supported. <=", "yellow", "on_red"))
          print(colored("\n => END <=\n", "yellow","on_blue"))
-         raw_input(colored("Press Enter to exit", "yellow", "on_blue"))
+         time.sleep(6)
          sys.exit()
    else:
       print(colored(" => This video stream can't be recorded. <=", "yellow", "on_red"))
       print(colored("\n => END <=\n", "yellow","on_blue"))
-      raw_input(colored("Press Enter to exit", "yellow", "on_blue"))
+      time.sleep(6)
       sys.exit()
