@@ -1,8 +1,8 @@
-# MFC Anonymous All Modes Recorder v.1.0.6 by horacio9a for Python 2.7.14
+# MFC Anonymous All Modes Recorder v.1.0.7 by horacio9a for Python 2.7.14
 
 import sys,os,urllib,re,json,time,datetime,random,requests,command,websocket
 reload(sys)
-sys.setdefaultencoding('utf8')
+sys.setdefaultencoding('utf-8')
 from websocket import create_connection
 from colorama import init, Fore, Back, Style
 from termcolor import colored
@@ -83,6 +83,11 @@ def read_model_data(m):
       age = '-'
 
    try:
+      occupation = u_info['occupation']
+   except:
+      occupation = '-'
+
+   try:
       topic = urllib.unquote(m_info['topic']).decode('utf-8')
    except:
       topic = '-'
@@ -110,7 +115,7 @@ def read_model_data(m):
    except KeyError:
       pass
    print (colored(" => ({}) * {} * ({}) * Server: {} * Score: {} * Viewers: {} <=", "yellow", "on_blue")).format(camgirl,buf,cserver,server,camscore,rc)
-   print (colored("\n => Continent: {} * Country: {} * City: {} * Age: {} * Ethnic: {} <=", "yellow", "on_blue")).format(continent,country,city,age,ethnic)
+   print (colored("\n => Cont: {} * Location: {}-{} * Age: {} * Ethnic: {} * Job: {} <=", "yellow", "on_blue")).format(continent,city,country,age,ethnic,occupation)
    print (colored("\n => Topic => {} <=", "yellow", "on_blue")).format(topic)
    print (colored("\n => Blurb => {} <=\n", "yellow", "on_blue")).format(blurb)
 #   print (colored(" => (MODEL DATA) => {} <=\n", "white", "on_blue")).format(msg)
@@ -228,7 +233,7 @@ if __name__ == "__main__":
          if mod == 'FFMPEG':
             print (colored("\n => FFMPEG-REC => {} <=","yellow","on_red")).format(fn1)
             print
-            command = ('{} -hide_banner -loglevel panic -i {} -c:v copy -c:a aac -b:a 160k {}'.format(ffmpeg,hlsurl,fp))
+            command = ('{} -hide_banner -loglevel panic -i {} -c:v copy -c:a aac -b:a 160k {}'.format(ffmpeg,hlsurl,pf1))
             os.system(command)
             print(colored(" => END <= ", "yellow","on_blue"))
 
