@@ -45,7 +45,7 @@ IF !n!==%M% SET MODEL=%%A
 :MFCFFR_
 ECHO.
 SET MODELNAME=%MODEL% ############ %M% ############################
-SET _MODEL_=%MODELNAME:~0,37%
+SET _MODEL_=%MODELNAME:~0,33%
 ECHO.
 CLS && ECHO #################################################
 ECHO ### MFCFFR #### P Y T H O N   R E C #### 24/7 ###
@@ -78,12 +78,12 @@ IF !n!==%M% SET MODEL=%%A
 :MFCLSR_
 ECHO.
 SET MODELNAME=%MODEL% ############ %M% ############################
-SET _MODEL_=%MODELNAME:~0,34%
+SET _MODEL_=%MODELNAME:~0,33%
 ECHO.
-CLS && ECHO #################################################
-ECHO ### MFCLSR ### P Y T H O N   R E C ##### 24/7 ###
+CLS && ECHO ################################################
+ECHO ### MFCLSR ### P Y T H O N   R E C #### 24/7 ###
 ECHO ### LS ####### %_MODEL_%
-ECHO #################################################
+ECHO ################################################
 cd C:/
 COLOR 0F
 cd -mfc-py
@@ -144,7 +144,7 @@ IF !n!==%M% SET MODEL=%%A
 :MFCYTR_
 ECHO.
 SET MODELNAME=%MODEL% ############ %M% ############################
-SET _MODEL_=%MODELNAME:~0,37%
+SET _MODEL_=%MODELNAME:~0,33%
 ECHO.
 CLS && ECHO #################################################
 ECHO ### MFCYTR #### P Y T H O N   R E C #### 24/7 ###
