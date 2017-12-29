@@ -1,4 +1,4 @@
-# MFC Anonymous All Modes Recorder v.1.0.7 by horacio9a for Python 2.7.14
+# MFC Anonymous All Modes Recorder v.1.0.8 by horacio9a for Python 2.7.14
 
 import sys,os,urllib,re,json,time,datetime,random,requests,command,websocket
 reload(sys)
@@ -43,7 +43,7 @@ def read_model_data(m):
       sys.exit()
    vs = msg['vs']
    if vs == 127:
-      print (colored(" => ({}) is OFFLINE <=", "white", "on_red")).format(model)
+      print (colored(" => Model ({}) is OFFLINE <=", "white", "on_red")).format(model)
       print(colored("\n => END <=", 'yellow','on_blue'))
       time.sleep(3)
       sys.exit()
@@ -115,10 +115,10 @@ def read_model_data(m):
    except:
       pass
 
-   print (colored(" => ({}) * {} * ({}) * Server: {} * Flags: {} * Score: {} <=", "yellow", "on_blue")).format(model,buf,cserver,server,flags,camscore)
+   print (colored(" => ({}) * {} * ({}) * Server: {} * Flags: {} * Score: {} <=", "white", "on_blue")).format(model,buf,cserver,server,flags,camscore)
    print (colored("\n => Continent: {} * Location: {}-{} * Age: {} * Ethnic: {} <=", "yellow", "on_blue")).format(continent,city,country,age,ethnic)
    print (colored("\n => Occupation: {} * New: {} * Viewers: {} * Blurb: {} <=", "yellow", "on_blue")).format(occupation,newmodel,rc,blurb)
-   print (colored("\n => Topic: {} <=\n", "yellow", "on_blue")).format(topic)
+   print (colored("\n => Topic: {} <=\n", "blue", "on_white")).format(topic)
    # print (colored(" => (MODEL DATA) => {} <=\n", "white", "on_blue")).format(mdata)
 
 if __name__ == '__main__':
@@ -297,6 +297,7 @@ if __name__ == '__main__':
          print(colored("\n => END <=", "yellow","on_blue"))
          time.sleep(1)
          sys.exit()
+
    else:
       print (colored(" => ({}) video stream can't be recorded now <=", "white", "on_red")).format(model)
       raw_input(colored("\n => Press Enter to exit <=", "yellow", "on_blue"))
