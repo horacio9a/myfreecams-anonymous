@@ -24,33 +24,30 @@ vs_str[90] = 'CAM-OFF'
 vs_str[127] = 'OFFLINE'
 
 def fc_decode_json(m):
-   return json.loads(m[m.find('{'):].decode('utf-8','ignore'))
+   try:
+      return json.loads(m[m.find('{'):].decode('utf-8','ignore'))
+   except:
+      print (colored(" => Error reply ... check your entry ({}) <=\n", "white", "on_red")).format(model)
+      time.sleep(6)
+      print(colored(" => END <=", "yellow","on_blue"))
+      time.sleep(1)
+      sys.exit()
 
 def read_model_data(m):
    global model
    global server
    global cid
-   global uid
    global vs
    msg = fc_decode_json(m)
-   try:
-      sid = msg['sid']
-      level = msg['lv']
-   except:
-      print(colored(" => Error reply ... check your entry <=", "white", "on_red"))
-      print(colored("\n => END <=", "yellow","on_blue"))
-      time.sleep(6)
-      sys.exit()
+   model = msg['nm']
+   cid = msg['uid'] + 100000000
    vs = msg['vs']
    if vs == 127:
-      print (colored(" => Model ({}) is OFFLINE <=", "white", "on_red")).format(model)
-      print(colored("\n => END <=", 'yellow','on_blue'))
+      print (colored(" => Model ({}) is OFFLINE <=\n", "white", "on_red")).format(model)
       time.sleep(3)
+      print(colored(" => END <=", 'yellow','on_blue'))
+      time.sleep(1)
       sys.exit()
-
-   model = msg['nm']
-   uid = msg['uid']
-   cid = msg['uid'] + 100000000
    m_info = msg['m']
    u_info = msg['u']
    flags = m_info['flags']
@@ -118,7 +115,7 @@ def read_model_data(m):
    print (colored(" => ({}) * {} * ({}) * Server: {} * Flags: {} * Score: {} <=", "white", "on_blue")).format(model,buf,cserver,server,flags,camscore)
    print (colored("\n => Continent: {} * Location: {}-{} * Age: {} * Ethnic: {} <=", "yellow", "on_blue")).format(continent,city,country,age,ethnic)
    print (colored("\n => Occupation: {} * New: {} * Viewers: {} * Blurb: {} <=", "yellow", "on_blue")).format(occupation,newmodel,rc,blurb)
-   print (colored("\n => Topic: {} <=\n", "blue", "on_white")).format(topic)
+   print (colored("\n => Topic => {} <=\n", "blue", "on_white")).format(topic)
    # print (colored(" => (MODEL DATA) => {} <=\n", "white", "on_blue")).format(mdata)
 
 if __name__ == '__main__':
@@ -168,9 +165,10 @@ if __name__ == '__main__':
       ws.send(send_msg_hello)
       ws.send(send_msg_login)
    except:
-      print (colored(" => {} server is busy ... Try again <=", "white", "on_red")).format(cserver)
-      print(colored("\n => END <=", "yellow","on_blue"))
-      time.sleep(6)
+      print (colored(" => {} server is busy ... Try again <=\n", "white", "on_red")).format(cserver)
+      time.sleep(3)
+      print(colored(" => END <=", "yellow","on_blue"))
+      time.sleep(1)
       sys.exit()
    rembuf = ''
    quitting = 0
