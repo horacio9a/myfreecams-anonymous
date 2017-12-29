@@ -115,8 +115,8 @@ def read_model_data(m):
    print (colored(" => ({}) * {} * ({}) * Server: {} * Flags: {} * Score: {} <=", "white", "on_blue")).format(model,buf,cserver,server,flags,camscore)
    print (colored("\n => Continent: {} * Location: {}-{} * Age: {} * Ethnic: {} <=", "yellow", "on_blue")).format(continent,city,country,age,ethnic)
    print (colored("\n => Occupation: {} * New: {} * Viewers: {} * Blurb: {} <=", "yellow", "on_blue")).format(occupation,newmodel,rc,blurb)
-   print (colored("\n => Topic => {} <=", "blue", "on_white")).format(topic)
-   # print (colored("\n => (MODEL DATA) => {} <=", "white", "on_blue")).format(mdata)
+   print (colored("\n => Topic => {} <=\n", "blue", "on_white")).format(topic)
+   # print (colored(" => (MODEL DATA) => {} <=\n", "white", "on_blue")).format(mdata)
 
 if __name__ == '__main__':
    if len(sys.argv) > 1:
@@ -203,7 +203,7 @@ if __name__ == '__main__':
       if server != 0:
          while True:
              try:
-                mode = int(raw_input(colored("\n => Mode => Exit(6) => URL(5) => YTDL(4) => SL(3) => LS(2) => FFMPEG(1) => FFPLAY(0) => ", "white", "on_green")))
+                mode = int(raw_input(colored(" => Mode => Exit(6) => URL(5) => YTDL(4) => SL(3) => LS(2) => FFMPEG(1) => FFPLAY(0) => ", "white", "on_green")))
                 break
              except ValueError:
                 print(colored("\n => Input must be a number <=\n", "white", "on_red"))
