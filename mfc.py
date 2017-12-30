@@ -33,6 +33,7 @@ def fc_decode_json(m):
 def read_model_data(m):
    global model
    global server
+   global camserver
    global cid
    global vs
    msg = fc_decode_json(m)
@@ -109,7 +110,7 @@ def read_model_data(m):
    except:
       pass
 
-   print (colored("\n => ({}) * {} * ({}) * Server: {} * Flags: {} * Score: {} <=", "white", "on_blue")).format(model,buf,cserver,server,flags,camscore)
+   print (colored("\n => ({}) * {} * ({}) * CS: {} * Flags: {} * Score: {} <=", "white", "on_blue")).format(model,buf,cserver,camserver,flags,camscore)
    print (colored("\n => Continent: {} * Location: {}-{} * Age: {} * Ethnic: {} <=", "yellow", "on_blue")).format(continent,city,country,age,ethnic)
    print (colored("\n => Occupation: {} * New: {} * Viewers: {} * Blurb: {} <=", "yellow", "on_blue")).format(occupation,newmodel,rc,blurb)
    print (colored("\n => Topic => {} <=", "blue", "on_white")).format(topic)
