@@ -1,4 +1,5 @@
-# MFC Anonymous All Modes Recorder v.1.0.9 by horacio9a for Python 2.7.14
+# MFC Anonymous All Modes Recorder v.1.0.10 by horacio9a for Python 2.7.14
+# coding: utf-8
 
 import sys,os,urllib,re,json,time,datetime,random,requests,command,websocket
 reload(sys)
@@ -10,7 +11,9 @@ config = ConfigParser.ConfigParser()
 config.read('config.cfg')
 
 init()
-print(colored('\n => START <=\n', 'yellow', 'on_blue'))
+print
+print(colored(' => START <=', 'yellow', 'on_blue'))
+print
 
 vs_str = {}
 vs_str[0] = 'PUBLIC'
@@ -24,9 +27,11 @@ def fc_decode_json(m):
    try:
       return json.loads(m[m.find('{'):].decode('utf-8','ignore'))
    except:
-      print (colored('\n => Error reply ... check your entry ({}) <=', 'white', 'on_red')).format(model)
+      print
+      print (colored(' => Error reply ... check your entry ({}) <=', 'white', 'on_red')).format(model)
       time.sleep(6)
-      print(colored('\n => END <=', 'yellow','on_blue'))
+      print
+      print(colored(' => END <=', 'yellow','on_blue'))
       time.sleep(1)
       sys.exit()
 
@@ -41,9 +46,11 @@ def read_model_data(m):
    cid = msg['uid'] + 100000000
    vs = msg['vs']
    if vs == 127:
-      print (colored('\n => Model ({}) is OFFLINE <=', 'white', 'on_red')).format(model)
+      print
+      print (colored(' => Model ({}) is OFFLINE <=', 'white', 'on_red')).format(model)
       time.sleep(3)
-      print(colored('\n => END <=', 'yellow','on_blue'))
+      print
+      print(colored(' => END <=', 'yellow','on_blue'))
       time.sleep(1)
       sys.exit()
    m_info = msg['m']
@@ -129,7 +136,8 @@ if __name__ == '__main__':
             cgn = int(raw_input(colored(' => Select MFC Model => ', 'yellow', 'on_blue')))
             break
          except ValueError:
-            print(colored('\n => Input must be a number <=', 'white', 'on_red'))
+            print
+            print(colored(' => Input must be a number <=', 'white', 'on_red'))
       model = open(config.get('files', 'model_list'), 'r').readlines()[cgn-1][:-1]
    try:
       cservers = ["xchat108","xchat61","xchat94","xchat109","xchat22","xchat47","xchat48","xchat49","xchat26",
@@ -160,9 +168,11 @@ if __name__ == '__main__':
       ws.send(send_msg_login)
 
    except:
-      print (colored('\n => {} server is busy ... Try again <=', 'white', 'on_red')).format(cserver)
+      print
+      print (colored(' => {} server is busy ... Try again <=', 'white', 'on_red')).format(cserver)
       time.sleep(3)
-      print(colored('\n => END <=', 'yellow','on_blue'))
+      print
+      print(colored(' => END <=', 'yellow','on_blue'))
       time.sleep(1)
       sys.exit()
 
@@ -199,23 +209,26 @@ if __name__ == '__main__':
       if server != 0:
          while True:
              try:
-                mode = int(raw_input(colored('\n => Mode => Exit(6) => URL(5) => YTDL(4) => SL(3) => LS(2) => FFMPEG(1) => FFPLAY(0) => ', 'white', 'on_green')))
+                mode = int(raw_input(colored('\n => Mode => Exit(7) => URL(6) => YTDL(5) => SL(4) => LS(3) => RTMP(2) => FFMPEG(1) => FFPLAY(0) => ', 'white', 'on_green')))
                 break
              except ValueError:
-                print(colored('\n => Input must be a number <=', 'white', 'on_red'))
+                print
+                print(colored(' => Input must be a number <=', 'white', 'on_red'))
          if mode == 0:
             mod = 'FFPLAY'
          if mode == 1:
             mod = 'FFMPEG'
          if mode == 2:
-            mod = 'LS'
+            mod = 'RTMP'
          if mode == 3:
-            mod = 'SL'
+            mod = 'LS'
          if mode == 4:
-            mod = 'YTDL'
+            mod = 'SL'
          if mode == 5:
-            mod = 'URL'
+            mod = 'YTDL'
          if mode == 6:
+            mod = 'URL'
+         if mode == 7:
             mod = 'EXIT'
 
          hlsurl = 'http://video{}.myfreecams.com:1935/NxServer/ngrp:mfc_{}.f4v_mobile/playlist.m3u8'.format(server,cid)
@@ -236,63 +249,93 @@ if __name__ == '__main__':
          livestreamer = config.get('files', 'livestreamer')
          streamlink = config.get('files', 'streamlink')
          youtube = config.get('files', 'youtube')
+         rtmp = config.get('files', 'rtmp')
 
          if mod == 'FFPLAY':
-            print (colored('\n => FFPLAY => {} <=', 'yellow', 'on_magenta')).format(fn)
+            print
+            print (colored(' => FFPLAY => {} <=', 'yellow', 'on_magenta')).format(fn)
             command = '{} -hide_banner -loglevel panic -i {} -infbuf -autoexit -x 640 -y 480 -window_title "{} * {} * {} * {}"'.format(ffplay,hlsurl,model,stime,cserver,cgn)
             os.system(command)
+            print
             print(colored(' => END <= ', 'yellow','on_blue'))
 
          if mod == 'FFMPEG':
-            print (colored('\n => FFMPEG-REC => {} <=','yellow','on_red')).format(fn1)
             print
-            command = ('{} -hide_banner -loglevel panic -i {} -c:v copy -c:a aac -b:a 160k {}'.format(ffmpeg,hlsurl,pf1))
+            print (colored(' => FFMPEG-REC => {} <=','yellow','on_red')).format(fn1)
+            print
+            command = '{} -hide_banner -loglevel panic -i {} -c:v copy -c:a aac -b:a 160k {}'.format(ffmpeg,hlsurl,pf1)
             os.system(command)
+            print
+            print(colored(' => END <= ', 'yellow','on_blue'))
+
+         if mod == 'RTMP':
+            print
+            print (colored(' => RTMP-REC >>> {} <<<', 'yellow', 'on_red')).format(fn1)
+            print
+            command = '{} {} {}'.format(rtmp,model,pf1)
+            os.system(command)
+            print
             print(colored(' => END <= ', 'yellow','on_blue'))
 
          if mod == 'LS':
-            print (colored('\n => LS-REC >>> {} <<<', 'yellow', 'on_red')).format(fn2)
+            print
+            print (colored(' => LS-REC >>> {} <<<', 'yellow', 'on_red')).format(fn2)
             print
             command = '{} hlsvariant://{} best -Q -o {}'.format(livestreamer,hlsurl,pf2)
             os.system(command)
+            print
             print(colored(' => END <= ', 'yellow','on_blue'))
 
          if mod == 'SL':
-            print (colored('\n => SL-REC >>> {} <<<', 'yellow', 'on_red')).format(fn2)
+            print
+            print (colored(' => SL-REC >>> {} <<<', 'yellow', 'on_red')).format(fn2)
             print
             command = '{} hls://{} best -Q -o {}'.format(streamlink,hlsurl,pf2)
             os.system(command)
+            print
             print(colored(' => END <= ', 'yellow','on_blue'))
 
          if mod == 'YTDL':
-            print (colored('\n => YTDL-REC => {} <=', 'yellow', 'on_red')).format(fn3)
+            print
+            print (colored(' => YTDL-REC => {} <=', 'yellow', 'on_red')).format(fn3)
             command = '{} --hls-use-mpegts --no-part -q {} -o {}'.format(youtube,hlsurl,pf3)
             os.system(command)
-            print(colored('\n => END <= ', 'yellow','on_blue'))
+            print
+            print(colored(' => END <= ', 'yellow','on_blue'))
 
          if mod == 'URL':
-            print (colored('\n => URL => {} <=', 'white', 'on_green')).format(fn4)
+            print
+            print (colored(' => URL => {} <=', 'white', 'on_green')).format(fn4)
             file=open(pf4,'wb')
             file.write(hlsurl)
             file.close()
-            raw_input(colored('\n => Press Enter to exit <=', 'yellow', 'on_blue'))
-            print(colored('\n => END <=', 'yellow','on_blue'))
+            print
+            raw_input(colored(' => Press Enter to exit <=', 'yellow', 'on_blue'))
+            print
+            print(colored(' => END <=', 'yellow','on_blue'))
 
          if mod == 'EXIT':
-            print(colored('\n => END <= ', 'yellow','on_blue'))
+            print
+            print(colored(' => END <= ', 'yellow','on_blue'))
             time.sleep(3)
             sys.exit()
 
       else:
-         print (colored("\n => ({}) is 'NO MOBILE FEED' model who isn't supported yet <=", 'white', 'on_red')).format(model)
-         raw_input(colored('\n => Press Enter to exit <=', 'yellow', 'on_blue'))
-         print(colored('\n => END <=', 'yellow','on_blue'))
+         print
+         print (colored(" => ({}) is 'NO MOBILE FEED' model who isn't supported yet <=", 'white', 'on_red')).format(model)
+         print
+         raw_input(colored(' => Press Enter to exit <=', 'yellow', 'on_blue'))
+         print
+         print(colored(' => END <=', 'yellow','on_blue'))
          time.sleep(1)
          sys.exit()
 
    else:
-      print (colored("\n => ({}) video stream can't be recorded now <=", 'white', 'on_red')).format(model)
-      raw_input(colored('\n => Press Enter to exit <=', 'yellow', 'on_blue'))
-      print(colored('\n => END <=', 'yellow','on_blue'))
+      print
+      print (colored(" => ({}) video stream can't be recorded now <=", 'white', 'on_red')).format(model)
+      print
+      raw_input(colored(' => Press Enter to exit <=', 'yellow', 'on_blue'))
+      print
+      print(colored(' => END <=', 'yellow','on_blue'))
       time.sleep(1)
       sys.exit()
