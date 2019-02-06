@@ -20,6 +20,7 @@ vs_str[0] = 'PUBLIC'
 vs_str[2] = 'AWAY'
 vs_str[12] = 'PRIVATE'
 vs_str[13] = 'GROUP'
+vs_str[14] = 'CLUB'
 vs_str[90] = 'CAM-OFF'
 vs_str[127] = 'OFFLINE'
 
@@ -117,11 +118,16 @@ def read_model_data(m):
    except:
       pass
 
-   print (colored('\n => ({}) * {} * ({}) * CS: {} * Flags: {} * Score: {} <=', 'white', 'on_blue')).format(model,buf,cserver,camserver,flags,camscore)
-   print (colored('\n => Continent: {} * Location: {}-{} * Age: {} * Ethnic: {} <=', 'yellow', 'on_blue')).format(continent,city,country,age,ethnic)
-   print (colored('\n => Occupation: {} * New: {} * Viewers: {} * Blurb: {} <=', 'yellow', 'on_blue')).format(occupation,newmodel,rc,blurb)
-   print (colored('\n => Topic => {} <=', 'yellow', 'on_blue')).format(topic)
-   # print (colored('\n => (MODEL DATA) => {} <=', 'white', 'on_blue')).format(mdata)
+   print
+   print (colored(' => ({}) * {} * ({}) * CS: {} * Flags: {} * Score: {} <=', 'white', 'on_blue')).format(model,buf,cserver,camserver,flags,camscore)
+   print
+   print (colored(' => Continent: {} * Location: {}-{} * Age: {} * Ethnic: {} <=', 'yellow', 'on_blue')).format(continent,city,country,age,ethnic)
+   print
+   print (colored(' => Occupation: {} * New: {} * Viewers: {} * Blurb: {} <=', 'yellow', 'on_blue')).format(occupation,newmodel,rc,blurb)
+   print
+   print (colored(' => Topic => {} <=', 'yellow', 'on_blue')).format(topic)
+   # print
+   # print (colored(' => (MODEL DATA) => {} <=', 'white', 'on_blue')).format(mdata)
 
 if __name__ == '__main__':
    if len(sys.argv) > 1:
@@ -209,7 +215,8 @@ if __name__ == '__main__':
       if server != 0:
          while True:
              try:
-                mode = int(raw_input(colored('\n => Mode => Exit(7) => URL(6) => YTDL(5) => SL(4) => LS(3) => RTMP(2) => FFMPEG(1) => FFPLAY(0) => ', 'white', 'on_green')))
+                print
+                mode = int(raw_input(colored(' => Mode => Exit(7) => URL(6) => YTDL(5) => SL(4) => LS(3) => RTMP(2) => FFMPEG(1) => FFPLAY(0) => ', 'white', 'on_green')))
                 break
              except ValueError:
                 print
@@ -263,7 +270,7 @@ if __name__ == '__main__':
             print
             print (colored(' => FFMPEG-REC => {} <=','yellow','on_red')).format(fn1)
             print
-            command = '{} -hide_banner -loglevel panic -i {} -c:v copy -c:a aac -b:a 160k {}'.format(ffmpeg,hlsurl,pf1)
+            command = '{} -hide_banner -loglevel panic -i {} -c:v copy -map 0:1 -map 0:2 -c:a aac -b:a 160k {}'.format(ffmpeg,hlsurl,pf1)
             os.system(command)
             print
             print(colored(' => END <= ', 'yellow','on_blue'))
@@ -281,7 +288,7 @@ if __name__ == '__main__':
             print
             print (colored(' => LS-REC >>> {} <<<', 'yellow', 'on_red')).format(fn2)
             print
-            command = '{} hlsvariant://{} best -Q -o {}'.format(livestreamer,hlsurl,pf2)
+            command = '{} hlsvariant://{} best -Q --stream-sorting-excludes=960p -o {}'.format(livestreamer,hlsurl,pf2)
             os.system(command)
             print
             print(colored(' => END <= ', 'yellow','on_blue'))
@@ -290,7 +297,7 @@ if __name__ == '__main__':
             print
             print (colored(' => SL-REC >>> {} <<<', 'yellow', 'on_red')).format(fn2)
             print
-            command = '{} hls://{} best -Q -o {}'.format(streamlink,hlsurl,pf2)
+            command = '{} hls://{} best -Q --stream-sorting-excludes=960p -o {}'.format(streamlink,hlsurl,pf2)
             os.system(command)
             print
             print(colored(' => END <= ', 'yellow','on_blue'))
@@ -298,7 +305,7 @@ if __name__ == '__main__':
          if mod == 'YTDL':
             print
             print (colored(' => YTDL-REC => {} <=', 'yellow', 'on_red')).format(fn3)
-            command = '{} --hls-use-mpegts --no-part -q {} -o {}'.format(youtube,hlsurl,pf3)
+            command = '{} --hls-use-mpegts --no-part --all-formats -q {} -o {}'.format(youtube,hlsurl,pf3)
             os.system(command)
             print
             print(colored(' => END <= ', 'yellow','on_blue'))
