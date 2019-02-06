@@ -4,14 +4,14 @@ SETLOCAL EnableDelayedExpansion
 SET OUT_DIR=C:/Videos/MFC/
 CLS
 ECHO.
-SET /P MODE=EX(7) START(6) MFCYTR(5) MFCSLR(4) MFCLSR(3) MFCFFR(2) MFCRTMPR(1) MFC(0)(%MODE%): 
+SET /P MODE=EXIT(7) START(6) MFCTSR(5) MFCSLR(4) MFCLSR(3) MFCFLVR(2) MFCRTMPR(1) MFC(0)(%MODE%): 
 IF "%MODE%"=="" GOTO MFC
 IF "%MODE%"=="0" GOTO MFC
 IF "%MODE%"=="1" GOTO MFCRTMPR
-IF "%MODE%"=="2" GOTO MFCFFR
+IF "%MODE%"=="2" GOTO MFCFLVR
 IF "%MODE%"=="3" GOTO MFCLSR
 IF "%MODE%"=="4" GOTO MFCSLR
-IF "%MODE%"=="5" GOTO MFCYTR
+IF "%MODE%"=="5" GOTO MFCTSR
 IF "%MODE%"=="6" GOTO START
 IF "%MODE%"=="7" GOTO EXIT
 :MFC
@@ -47,7 +47,7 @@ IF !n!==%M% SET MODEL=%%A
 :MFCRTMPR_
 COLOR 0F
 ECHO.
-SET MODELNAME=%MODEL% ############ %M% ############################
+SET MODELNAME=%MODEL% ######### %M% ###############################
 SET _MODEL_=%MODELNAME:~0,33%
 ECHO.
 CLS && ECHO #################################################
@@ -60,8 +60,7 @@ cd %OUT_DIR%
 FOR /R %%F in (*) DO IF %%~ZF LSS 40 DEL "%%F"
 TIMEOUT 30
 GOTO MFCRTMPR_
-
-:MFCFFR
+:MFCFLVR
 ECHO.
 SET n=0
 FOR /F "tokens=*" %%A IN (C:/Windows/MFC_Model.txt) DO (
@@ -79,22 +78,22 @@ FOR /F "tokens=*" %%A IN (C:/Windows/MFC_Model.txt) DO (
 SET /A n=n+1
 IF !n!==%M% SET MODEL=%%A
 )
-:MFCFFR_
+:MFCFLVR_
 COLOR 0F
 ECHO.
-SET MODELNAME=%MODEL% ############ %M% ############################
+SET MODELNAME=%MODEL% ######### %M% ###############################
 SET _MODEL_=%MODELNAME:~0,33%
 ECHO.
 CLS && ECHO #################################################
-ECHO ### MFCFFR #### P Y T H O N   R E C #### 24/7 ###
-ECHO ### FFMPEG #### %_MODEL_%
+ECHO ### MFCFLVR ### P Y T H O N   R E C #### 24/7 ###
+ECHO ### FF-FLV #### %_MODEL_%
 ECHO #################################################
 cd C:/-mfc-py
-python mfcffr.py %MODEL%
+python mfcflvr.py %MODEL%
 cd %OUT_DIR%
 FOR /R %%F in (*) DO IF %%~ZF LSS 40 DEL "%%F"
 TIMEOUT 30
-GOTO MFCFFR_
+GOTO MFCFLVR_
 :MFCLSR
 ECHO.
 SET n=0
@@ -116,7 +115,7 @@ IF !n!==%M% SET MODEL=%%A
 :MFCLSR_
 COLOR 0F
 ECHO.
-SET MODELNAME=%MODEL% ############ %M% ############################
+SET MODELNAME=%MODEL% ######### %M% ###############################
 SET _MODEL_=%MODELNAME:~0,33%
 ECHO.
 CLS && ECHO ################################################
@@ -150,7 +149,7 @@ IF !n!==%M% SET MODEL=%%A
 :MFCSLR_
 COLOR 0F
 ECHO.
-SET MODELNAME=%MODEL% ############ %M% ############################
+SET MODELNAME=%MODEL% ######### %M% ###############################
 SET _MODEL_=%MODELNAME:~0,33%
 ECHO.
 CLS && ECHO #################################################
@@ -163,7 +162,7 @@ cd %OUT_DIR%
 FOR /R %%F in (*) DO IF %%~ZF LSS 40 DEL "%%F"
 TIMEOUT 30
 GOTO MFCSLR_
-:MFCYTR
+:MFCTSR
 ECHO.
 SET n=0
 FOR /F "tokens=*" %%A IN (C:/Windows/MFC_Model.txt) DO (
@@ -181,22 +180,22 @@ FOR /F "tokens=*" %%A IN (C:/Windows/MFC_Model.txt) DO (
 SET /A n=n+1
 IF !n!==%M% SET MODEL=%%A
 )
-:MFCYTR_
+:MFCTSR_
 COLOR 0F
 ECHO.
-SET MODELNAME=%MODEL% ############ %M% ############################
+SET MODELNAME=%MODEL% ######### %M% ###############################
 SET _MODEL_=%MODELNAME:~0,33%
 ECHO.
 CLS && ECHO #################################################
-ECHO ### MFCYTR #### P Y T H O N   R E C #### 24/7 ###
-ECHO ### YTDL ###### %_MODEL_%
+ECHO ### MFCTSR #### P Y T H O N   R E C #### 24/7 ###
+ECHO ### FF-TS ##### %_MODEL_%
 ECHO #################################################
 cd C:/-mfc-py
-python mfcytr.py %MODEL%
+python mfctsr.py %MODEL%
 cd %OUT_DIR%
 FOR /R %%F in (*) DO IF %%~ZF LSS 40 DEL "%%F"
 TIMEOUT 30
-GOTO MFCYTR_
+GOTO MFCTSR_
 :EXIT
 GOTO :EOF
 ENDLOCAL
