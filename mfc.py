@@ -1,4 +1,4 @@
-# MFC Anonymous All Modes Recorder v.1.0.10 by horacio9a for Python 2.7.14
+# MFC Anonymous All Modes Recorder v.1.1.0 by horacio9a for Python 2.7.14
 # coding: utf-8
 
 import sys,os,urllib,re,json,time,datetime,random,requests,command,websocket
@@ -16,7 +16,7 @@ print(colored(' => START <=', 'yellow', 'on_blue'))
 print
 
 vs_str = {}
-vs_str[0] = 'PUBLIC'
+vs_str[0] = 'ONLINE'
 vs_str[2] = 'AWAY'
 vs_str[12] = 'PRIVATE'
 vs_str[13] = 'GROUP'
@@ -216,15 +216,15 @@ if __name__ == '__main__':
          while True:
              try:
                 print
-                mode = int(raw_input(colored(' => Mode => Exit(7) => URL(6) => YTDL(5) => SL(4) => LS(3) => RTMP(2) => FFMPEG(1) => FFPLAY(0) => ', 'white', 'on_green')))
+                mode = int(raw_input(colored(' => Mode => Exit(7) => URL(6) => FF-TS(5) => SL(4) => LS(3) => RTMP(2) => FF-FLV(1) => FF-VIEW(0) => ', 'white', 'on_green')))
                 break
              except ValueError:
                 print
                 print(colored(' => Input must be a number <=', 'white', 'on_red'))
          if mode == 0:
-            mod = 'FFPLAY'
+            mod = 'FF-VIEW'
          if mode == 1:
-            mod = 'FFMPEG'
+            mod = 'FF-FLV'
          if mode == 2:
             mod = 'RTMP'
          if mode == 3:
@@ -232,7 +232,7 @@ if __name__ == '__main__':
          if mode == 4:
             mod = 'SL'
          if mode == 5:
-            mod = 'YTDL'
+            mod = 'FF-TS'
          if mode == 6:
             mod = 'URL'
          if mode == 7:
@@ -255,20 +255,19 @@ if __name__ == '__main__':
          ffplay = config.get('files', 'ffplay')
          livestreamer = config.get('files', 'livestreamer')
          streamlink = config.get('files', 'streamlink')
-         youtube = config.get('files', 'youtube')
          rtmp = config.get('files', 'rtmp')
 
-         if mod == 'FFPLAY':
+         if mod == 'FF-VIEW':
             print
-            print (colored(' => FFPLAY => {} <=', 'yellow', 'on_magenta')).format(fn)
+            print (colored(' => FF-VIEW => {} <=', 'yellow', 'on_magenta')).format(fn)
             command = '{} -hide_banner -loglevel panic -i {} -infbuf -autoexit -x 640 -y 480 -window_title "{} * {} * {} * {}"'.format(ffplay,hlsurl,model,stime,cserver,cgn)
             os.system(command)
             print
             print(colored(' => END <= ', 'yellow','on_blue'))
 
-         if mod == 'FFMPEG':
+         if mod == 'FF-FLV':
             print
-            print (colored(' => FFMPEG-REC => {} <=','yellow','on_red')).format(fn1)
+            print (colored(' => FF-FLV-REC => {} <=','yellow','on_red')).format(fn1)
             print
             command = '{} -hide_banner -loglevel panic -i {} -c:v copy -map 0:1 -map 0:2 -c:a aac -b:a 160k {}'.format(ffmpeg,hlsurl,pf1)
             os.system(command)
@@ -302,10 +301,10 @@ if __name__ == '__main__':
             print
             print(colored(' => END <= ', 'yellow','on_blue'))
 
-         if mod == 'YTDL':
+         if mod == 'FF-TS':
             print
-            print (colored(' => YTDL-REC => {} <=', 'yellow', 'on_red')).format(fn3)
-            command = '{} --hls-use-mpegts --no-part --all-formats -q {} -o {}'.format(youtube,hlsurl,pf3)
+            print (colored(' => FF-TS-REC => {} <=', 'yellow', 'on_red')).format(fn3)
+            command = '{} -hide_banner -loglevel panic -i {} -map 0:1 -map 0:2 -c copy -vsync 2 -r 60 -b:v 500k {}'.format(ffmpeg,hlsurl,pf3)
             os.system(command)
             print
             print(colored(' => END <= ', 'yellow','on_blue'))
