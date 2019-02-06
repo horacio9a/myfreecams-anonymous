@@ -1,4 +1,4 @@
-# MFC Remote RTMP Anonymous Recorder v.1.0.10 by horacio9a for Python 2.7.14
+# MFC Remote RTMP Anonymous Recorder v.1.1.0 by horacio9a for Python 2.7.14
 # coding: utf-8
 
 import sys,os,urllib,re,json,time,datetime,random,requests,command,websocket
@@ -16,10 +16,11 @@ print(colored(' => START <=', 'yellow', 'on_blue'))
 print
 
 vs_str = {}
-vs_str[0] = 'PUBLIC'
+vs_str[0] = 'ONLINE'
 vs_str[2] = 'AWAY'
 vs_str[12] = 'PRIVATE'
 vs_str[13] = 'GROUP'
+vs_str[14] = 'CLUB'
 vs_str[90] = 'CAM-OFF'
 vs_str[127] = 'OFFLINE'
 
@@ -46,7 +47,6 @@ def read_model_data(m):
    cid = msg['uid'] + 100000000
    vs = msg['vs']
    if vs == 127:
-      print
       print (colored(' => Model ({}) is OFFLINE <=', 'white', 'on_red')).format(model)
       time.sleep(3)
       print
@@ -211,13 +211,17 @@ if __name__ == '__main__':
          print(colored(' => END <= ', 'yellow','on_blue'))
 
       else:
+         print
          print (colored(" => ({}) is 'NO MOBILE FEED' model who isn't supported yet <=", "white", "on_red")).format(model)
-         print(colored("\n => END <=", "yellow","on_blue"))
+         print
+         print(colored(" => END <=", "yellow","on_blue"))
          time.sleep(6)
          sys.exit()
 
    else:
+      print
       print (colored(" => ({}) video stream can't be recorded now <=", "white", "on_red")).format(model)
-      print(colored("\n => END <=", "yellow","on_blue"))
+      print
+      print(colored(" => END <=", "yellow","on_blue"))
       time.sleep(6)
       sys.exit()
