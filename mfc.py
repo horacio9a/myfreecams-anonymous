@@ -1,4 +1,4 @@
-# MFC Anonymous All Modes Recorder v.1.1.0 by horacio9a for Python 2.7.14
+# MFC Anonymous All Modes Recorder v.1.1.1 by horacio9a for Python 2.7.14
 # coding: utf-8
 
 import sys,os,urllib,re,json,time,datetime,random,requests,command,websocket
@@ -287,7 +287,7 @@ if __name__ == '__main__':
             print
             print (colored(' => LS-REC >>> {} <<<', 'yellow', 'on_red')).format(fn2)
             print
-            command = '{} hlsvariant://{} best -Q --stream-sorting-excludes=960p -o {}'.format(livestreamer,hlsurl,pf2)
+            command = '{} hlsvariant://{} best -Q --stream-sorting-excludes ">950p,>1500k" -o {}'.format(livestreamer,hlsurl,pf2)
             os.system(command)
             print
             print(colored(' => END <= ', 'yellow','on_blue'))
@@ -296,7 +296,7 @@ if __name__ == '__main__':
             print
             print (colored(' => SL-REC >>> {} <<<', 'yellow', 'on_red')).format(fn2)
             print
-            command = '{} hls://{} best -Q --stream-sorting-excludes=960p -o {}'.format(streamlink,hlsurl,pf2)
+            command = '{} hls://{} best -Q --stream-sorting-excludes ">950p,>1500k" -o {}'.format(streamlink,hlsurl,pf2)
             os.system(command)
             print
             print(colored(' => END <= ', 'yellow','on_blue'))
