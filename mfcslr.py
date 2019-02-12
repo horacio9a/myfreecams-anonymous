@@ -1,4 +1,4 @@
-# MFC Remote STREAMLINK Anonymous Recorder v.1.1.0 by horacio9a for Python 2.7.14
+# MFC Remote STREAMLINK Anonymous Recorder v.1.1.1 by horacio9a for Python 2.7.14
 
 import sys,os,urllib,re,json,time,datetime,random,requests,command,websocket
 reload(sys)
@@ -206,14 +206,14 @@ if __name__ == '__main__':
          print
          print (colored(' => SL-REC >>> {} <<<', 'yellow', 'on_red')).format(filename)
          print
-         command = '{} hls://{} best -Q --stream-sorting-excludes=960p -o {}'.format(streamlink,hlsurl,pf)
+         command = '{} hls://{} best -Q --stream-sorting-excludes ">950p,>1500k" -o {}'.format(streamlink,hlsurl,pf)
          os.system(command)
          print(colored(" => END <=","yellow","on_blue"))
          sys.exit()
 
       else:
          print
-         print (colored(" => ({}) is 'NO MOBILE FEED' model who isn't supported yet <=", "white", "on_red")).format(model)
+         print (colored(" => ({}) is 'NO MOBILE FEED' model who isn't supported <=", "white", "on_red")).format(model)
          print
          print(colored(" => END <=", "yellow","on_blue"))
          time.sleep(6)
